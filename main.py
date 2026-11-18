@@ -18,11 +18,18 @@ def AFDcCaso1():
                    'q3':'Esperando PIN (3er intento)',
                    'q4':'Escoger operacion',
                    'q5':'Retiro',
-                   'q6':'Operacion completada|Entregar recibo|Entregar dinero|Devilver tarjeta',}
+                   'q6':'Operacion completada|Entregar recibo|Entregar dinero|Devilver tarjeta',
+                   'q7':'Tarjeta bloqueada/retenida',}
     
     estado_inicial = 'q0'
     estados_aceptacion = ('q7','q6')
     transiciones = {('q0','a'):'q1',
+                    ('q0','b'):'q0',
+                    ('q0','c'):'q0',
+                    ('q0','d'):'q0',
+                    ('q0','e'):'q0',
+                    ('q0','f'):'q0',
+                    ('q0','g'):'q0',
                     ('q1','b'):'q4',
                     ('q1','c'):'q2',
                     ('q2','c'):'q3',
