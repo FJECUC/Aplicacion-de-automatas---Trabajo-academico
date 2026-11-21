@@ -1,6 +1,5 @@
-'''Automata Finito Determinista'''
-
 class AFD:
+    '''Automata Finito Determinista'''
     def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:str,transiciones:dict):
         self.__alfabeto = alfabeto
         self.__estados = estados
@@ -61,3 +60,8 @@ class AFD:
                 return False
         else:
             return False
+
+
+class AFND:
+    def __init__(self,estados:set):
+        self.estados = estados
