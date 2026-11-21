@@ -24,12 +24,6 @@ def AFDcCaso1():
     estado_inicial = 'q0'
     estados_aceptacion = ('q7','q6')
     transiciones = {('q0','a'):'q1',
-                    ('q0','b'):'q0',
-                    ('q0','c'):'q0',
-                    ('q0','d'):'q0',
-                    ('q0','e'):'q0',
-                    ('q0','f'):'q0',
-                    ('q0','g'):'q0',
                     ('q1','b'):'q4',
                     ('q1','c'):'q2',
                     ('q2','c'):'q3',

@@ -51,6 +51,9 @@ class AFD:
                     self.actualizarDerivaciones(estado_actual,simbolo)
                     # Transicion
                     estado_actual = self.__transiciones[(estado_actual,simbolo)]
+                else: # En caso no exista transicion con un input
+                    print(f'No hay transicion para {estado_actual} con {simbolo}')
+                    break
             if estado_actual in self.__estados_aceptacion:
                 print("La cadena es aceptada por el automata")
                 print(self.derivacion_traducida)
