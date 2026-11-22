@@ -56,7 +56,6 @@ class AFD:
             print('='*30)
             return False
 
-
 class AFND:
     '''Automata Finito No Determinista'''
     def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:str,relacion_transicion:dict):
@@ -94,6 +93,8 @@ class AFND:
         '''Validar si el automata acepta la cadena'''
         self.derivacion="" #Reiniciamos las derivaciones
         self.derivacion_traducida ="" #Reiniciamos las derivaciones traducidas
+        #def validarRecursivo(self, cadena):
+
         estado_actual = self.__estado_inicial
         if(self.cadenaEnLenguaje(cadena)):
             for simbolo in cadena:
