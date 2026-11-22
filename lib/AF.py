@@ -6,7 +6,6 @@ class AFD:
         self.__estados_aceptacion = estados_aceptacion
         self.__estado_inicial = estado_inicial
         self.__transiciones = transiciones
-
     def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:str,transiciones:dict, traducir_alfabeto:dict,desc_estado:dict):
         self.__alfabeto = alfabeto
         self.__estados = estados
@@ -75,13 +74,6 @@ class AFND:
         self.__desc_estado = desc_estado
         self.derivacion = ""
         self.derivacion_traducida = ""
-
-    @property
-    def estados(self):
-        return self.__estados
-    @estados.setter
-    def estados(self,estados:set):
-        self.__estados = estados
 
     def cadenaEnLenguaje(self,cadena:str):
         '''Requisito: Validar si los simbolos de la cadena pertenecen al alfabeto'''

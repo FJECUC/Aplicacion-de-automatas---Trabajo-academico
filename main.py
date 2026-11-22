@@ -15,7 +15,6 @@ def readCadenas(archivo):
         return cadena
     finally:
         lineas_raw.close()
-
 def AFDCaso1():
     '''Automata para el caso 1'''
     def setAFData():
@@ -65,7 +64,7 @@ def AFDCaso1():
     # Creacion del automta
     automata = AF.AFD(alfabeto,estados,estados_aceptacion,estado_inicial,transiciones,traducir_alfabeto,desc_estado)
     #Leer cadenas del archivo cadenas.txt
-    cadenas = readCadenas("cadenas.txt")
+    cadenas = readCadenas("AFDcadenas.txt")
     #Validar cadenas
     print("==== Validando Cadenas ====")
     for cadena in cadenas:
@@ -166,6 +165,5 @@ def ejecutar():
             print('-'*30)
             print("==>Escriba una opcion valida<==")
             print('-'*30)
-
 # Ejecutar programa automata
 ejecutar()
