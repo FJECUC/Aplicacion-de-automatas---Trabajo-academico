@@ -69,7 +69,8 @@ def AFDCaso1():
     #Validar cadenas
     print("==== Validando Cadenas ====")
     for cadena in cadenas:
-        print(f"{automata.validarCadena(cadena)} : {cadena}")
+        trash = automata.validarCadena(cadena)
+        #print(f"{automata.validarCadena(cadena)} : {cadena}")
 def AFNDCaso2():
 # Caso 2
     def setAFData():
@@ -120,7 +121,8 @@ def AFNDCaso2():
 
     print("==== Validando Cadenas ====")
     for cadena in cadenas:
-        print(f"{automata.validarCadena(cadena)} : {cadena}")
+        trash=automata.validarCadena(cadena)
+        #print(f"{automata.validarCadena(cadena)} : {cadena}")
 def printMenu():
     print('=== Aplicaciones AF ===')
     print('[1] Caso 1 - AFD')

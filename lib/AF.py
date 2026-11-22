@@ -47,12 +47,14 @@ class AFD:
                 print(f'No hay transicion para {estado_actual} con {simbolo}')
                 break
         if estado_actual in self.__estados_aceptacion:
-            print("La cadena es aceptada por el automata")
+            print(f"La cadena {cadena} es aceptada por el automata")
             print(self.derivacion)
+            print('='*30)
             return True
         else:
-            print("La cadena no es aceptada por el automata")
+            print(f"La cadena {cadena} no es aceptada por el automata")
             print(self.derivacion)
+            print('='*30)
             return False
 
 
