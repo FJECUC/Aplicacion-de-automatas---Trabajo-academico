@@ -78,28 +78,30 @@ def AFDCaso1():
 def crearAutomataAFND():
     '''Crear AFND'''
     #Esta funcion es para tener las declaraciones en otra funcion
-    alfabeto = ('r','b','i','g')
+    alfabeto = {'r','b','i','g'}
     traducir_alfabeto = {
         "r": "Reiniciar busqueda",
         "b": "Buscar disponibilidad",
         "i": "Seleccionar sala grupal",
         "g": "Seleccionar sala individual"}
-    estados = ('q0','q1','q2','q3','q4')
+    estados = {'q0','q1','q2','q3','q4'}
     desc_estado = {
         'q0':'Esperando reinicio o busqueda',
         'q1':'Rama de busqueda de sala grupal',
         'q2':'Rama de busqueda de sala individual',
         'q3':'Reserva de sala grupal confirmada',
         'q4':'Reserva de sala individual confirmada'}
-    estado_inicial = 'q0'
-    estados_aceptacion = ('q7','q6')
+    estado_inicial ='q0'
+    estados_aceptacion = {'q3','q4'}
     relaciones = {
-        ('q0','r'):('q0'),
-        ('q0','b'):('q1','q2'),
-        ('q1','g'):('q3'),
-        ('q2','i'):('q4')}
+        ('q0','r'):{'q0'},
+        ('q0','b'):{'q1','q2'},
+        ('q1','g'):{'q3'},
+        ('q2','i'):{'q4'}}
     return AF.AFND(alfabeto,estados,estados_aceptacion,estado_inicial,relaciones,traducir_alfabeto,desc_estado)
+#Crear automata
 automataFND = crearAutomataAFND()
+#Procesar caso 2
 def AFNDCaso2(automata:AF.AFND):
 # Caso 2
     automata_caso2 = automata
@@ -107,7 +109,12 @@ def AFNDCaso2(automata:AF.AFND):
 
     print("==== Validando Cadenas ====")
     for cadena in cadenas:
-        trash=automata_caso2.validarCadena(cadena)
+        if(automata_caso2.validarCadena(cadena)):
+            print(f'La cadena {cadena} es aceptada')
+        else:
+            print(f'La cadena {cadena} no es aceptada')
+        print(automataFND.derivacion)
+        print('='*30)
         #print(f"{automata.validarCadena(cadena)} : {cadena}")
 # Aplicacion
 def printMenu():

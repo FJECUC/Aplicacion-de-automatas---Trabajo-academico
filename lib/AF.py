@@ -58,14 +58,7 @@ class AFD:
 
 class AFND:
     '''Automata Finito No Determinista'''
-    def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:str,relacion_transicion:dict):
-            self.__alfabeto = alfabeto
-            self.__estados = estados
-            self.__estados_aceptacion = estados_aceptacion
-            self.__estado_inicial = estado_inicial
-            self.__relacion_transicion = relacion_transicion
-    
-    def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:str,relacion_transicion:dict, traducir_alfabeto:dict,desc_estado:dict):
+    def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:set,relacion_transicion:dict, traducir_alfabeto:dict,desc_estado:dict):
         self.__alfabeto = alfabeto
         self.__estados = estados
         self.__estados_aceptacion = estados_aceptacion
@@ -76,40 +69,24 @@ class AFND:
         self.derivacion = ""
         self.derivacion_traducida = ""
 
-    def cadenaEnLenguaje(self,cadena:str):
-        '''Requisito: Validar si los simbolos de la cadena pertenecen al alfabeto'''
-        for simbolo in cadena:
-            if simbolo not in self.__alfabeto:
-                print("La cadena presenta simbolos que no pertenecen al alfabeto")
+    def actualizarDerivaciones(self,estado_actual,simbolo,siguientes:set):
+            '''Registra las derivaciones con simbolos o traducidos'''
+            for estado in estado_actual:
+                if (estado,simbolo) in self.__relacion_transicion:
+                    self.derivacion += f"{estado} --{simbolo}--> {siguientes}\n"
+            #self.derivacion_traducida += f"{self.__desc_estado[estado_actual]} --{self.__traducir_alfabeto[simbolo]}--> {self.__desc_estado[self.__relacion_transicion[(estado_actual,simbolo)]]}\n"
+
+    def validarCadena(self, cadena: str):
+        estados_actuales = {self.__estado_inicial}
+        self.derivacion = ''
+        for simbolo in cadena:#Se evalua simbolo por simbolo
+            if simbolo not in self.__alfabeto:# Se evalua si la cadena pertenece al lenguaje
                 return False
-        return True
+            siguientes = set()#Para almacenar el/los siguiente(s) estado(s)
+            for estado in estados_actuales:
+                siguientes.update(self.__relacion_transicion.get((estado, simbolo), set()))
 
-    def actualizarDerivaciones(self,estado_actual,simbolo):
-        '''Registra las derivaciones con simbolos o traducidos'''
-        self.derivacion += f"{estado_actual}--{simbolo}-->{self.__relacion_transicion[(estado_actual,simbolo)]}\n"
-        self.derivacion_traducida += f"{self.__desc_estado[estado_actual]}--{self.__traducir_alfabeto[simbolo]}-->{self.__desc_estado[self.__relacion_transicion[(estado_actual,simbolo)]]}\n"
+            self.actualizarDerivaciones(estados_actuales,simbolo,siguientes)
+            estados_actuales = siguientes
 
-    def validarCadena(self, cadena:str):
-        '''Validar si el automata acepta la cadena'''
-        self.derivacion="" #Reiniciamos las derivaciones
-        self.derivacion_traducida ="" #Reiniciamos las derivaciones traducidas
-        #def validarRecursivo(self, cadena):
-
-        estado_actual = self.__estado_inicial
-        if(self.cadenaEnLenguaje(cadena)):
-            for simbolo in cadena:
-                if (estado_actual,simbolo) in self.__relacion_transicion:
-                    # Registrar derivacion
-                    self.actualizarDerivaciones(estado_actual,simbolo)
-                    # Transicion
-                    estado_actual = self.__relacion_transicion[(estado_actual,simbolo)]
-            if estado_actual in self.__estados_aceptacion:
-                print("La cadena es aceptada por el automata")
-                print(self.derivacion_traducida)
-                print(self.derivacion)
-                return True
-            else:
-                print("La cadena no es aceptada por el automata")
-                return False
-        else:
-            return False
+        return bool(estados_actuales & self.__estados_aceptacion)
