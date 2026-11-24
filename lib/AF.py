@@ -55,7 +55,7 @@ class AFD:
             print(self.derivacion)
             print('='*30)
             return False
-
+#-------------------------------
 class AFND:
     '''Automata Finito No Determinista'''
     def __init__(self,alfabeto:set,estados:set,estados_aceptacion:set,estado_inicial:set,relacion_transicion:dict, traducir_alfabeto:dict,desc_estado:dict):
